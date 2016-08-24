@@ -1,0 +1,5 @@
+This is a simple python program that uses NYC public database and pandas to create a roadmap of NYC. The database is lacking tons of data and a complete map was not able to be generated, and therefore directions are quite minimal - this was just an attempt to see how far you can get with a public and free database.
+
+Just open and run/edit nycdrive.py
+
+The other files are other ideas/implementations that you should just ignore.
