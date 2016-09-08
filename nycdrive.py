@@ -42,7 +42,7 @@ class Map:
     def register_street(self, street_name):
         street_name = format_name(street_name)
         if self.streets.has_key(street_name):
-            print ('Street already registered')
+            #print ('Street already registered')
             return
         street_count = len(self.streets)
         self.streets[street_name] = street_count
@@ -89,7 +89,7 @@ class Map:
             return [spk1, spk2]
         npk = self.get_node_pk(spk1, spk2)
         if npk != -1:
-            print ('Previously registered intersection')
+            #print ('Previously registered intersection')
             return npk
         npk = len(self.nodes)
         node = Node(npk, [spk1, spk2])
@@ -112,16 +112,16 @@ class Map:
         to_spk = self.get_street_pk(to_name)
         from_spk = self.get_street_pk(from_name)
         if mid_spk == -1 or to_name == -1 or from_name == -1:
-            print('Edge Error: unregistered street(s)', mid_name, mid_spk, to_name, to_spk, from_name, from_spk)
+            #print('Edge Error: unregistered street(s)', mid_name, mid_spk, to_name, to_spk, from_name, from_spk)
             return -1
         from_npk = self.get_node_pk(mid_spk, from_spk)
         to_npk = self.get_node_pk(to_spk, mid_spk)
         if from_npk == -1 or to_npk == -1:
-            print('Edge error: unregistered node(s)', mid_name, to_name, from_name)
+            #print('Edge error: unregistered node(s)', mid_name, to_name, from_name)
             return -1
         epk = self.get_edge_pk(to_npk, from_npk)
         if epk != -1:
-            print('Error: previously registered edge', epk, mid_name, to_name, from_name)
+            #print('Error: previously registered edge', epk, mid_name, to_name, from_name)
             return -1
         epk = len(self.edges)
         edge = Edge(epk, self.nodes[to_npk], from_npk, weight_df)
@@ -296,42 +296,6 @@ if geolocation_map:
 
 
 #Finished building graph
-print ('Total nodes:', len(nyc_map.nodes))
 
-#Example - unconnected
-inter1 = ['STAFFORD AVE', 'HUGUENOT AVE']
-inter2 = ['AVE T', 'CONEY ISLAND AVE']
 
-inter_node1 = nyc_map.get_intersection_node(inter1)
-inter_node2 = nyc_map.get_intersection_node(inter2)
-
-max_nodes = len(nyc_map.nodes)
-
-car = Traveller(inter_node1, inter_node2, 'NA')
-car.dfs_travel()
-print car.path
-#test all potential paths
-printed = False
-catch_path = []
-if True:
-    for i in range(max_nodes):
-        for n in range(max_nodes):
-            if i == n:
-                continue
-            node_i = nyc_map.nodes[i]
-            node_n = nyc_map.nodes[n]
-            car = Traveller(node_i, node_n, '_9_00_10_00pm')
-            if geolocation_map and not congestion_map:
-                car.greedy_travel()
-            else:
-                car.dfs_travel()
-            if len(car.path) > 7:# printed:
-                printed = True
-                catch_path = car.path
-
-for pth in catch_path:
-    fspk1, fspk2 = pth.spks
-    sname1 = nyc_map.get_street_name(fspk1)
-    sname2 = nyc_map.get_street_name(fspk2)
-    print (sname1, sname2)
 
