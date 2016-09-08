@@ -260,29 +260,15 @@ congestion_data.describe()
 ```python
 geo_path = 'geolocations.json'
 geo_data = pd.read_json(geo_path)
-print geo_data.top()
+print geo_data.head()
 ```
 
-
-    ----------------------------------------------------------------------
-
-    AttributeError                       Traceback (most recent call last)
-
-    <ipython-input-14-0a093e0514a2> in <module>()
-          1 geo_path = 'geolocations.json'
-          2 geo_data = pd.read_json(geo_path)
-    ----> 3 print geo_data.top()
-    
-
-    /usr/local/lib/python2.7/dist-packages/pandas/core/generic.pyc in __getattr__(self, name)
-       2667             if name in self._info_axis:
-       2668                 return self[name]
-    -> 2669             return object.__getattribute__(self, name)
-       2670 
-       2671     def __setattr__(self, name, value):
-
-
-    AttributeError: 'DataFrame' object has no attribute 'top'
+                                             coordinates
+    1 AVE , EAST 120 ST        [40.7986749, -73.9334714]
+    1 AVE , EAST 124 ST        [40.8009838, -73.9317793]
+    1 AVE , EAST 97 ST         [40.7839555, -73.9442204]
+    1 AVE , EAST 99 ST         [40.7851892, -73.9433108]
+    1 AVENUE , EAST 60 STREET  [40.7602427, -73.9615112]
 
 
 ### Running the example
@@ -334,6 +320,16 @@ for pth in catch_path:
     sname2 = nyc_map.get_street_name(fspk2)
     print (sname1, sname2)
 ```
+
+    ('SPRING ST', 'CROSBY ST')
+    ('BROADWAY', 'SPRING ST')
+    ('BROADWAY', 'PRINCE ST')
+    ('BROADWAY', 'E 12 ST')
+    ('BROADWAY', 'E 11 ST')
+    ('BROADWAY', 'DUANE ST')
+    ('BROADWAY', 'MORRIS ST')
+    ('BROADWAY', 'BEAVER ST')
+
 
 The output is a list of intersections that are visited from start to destination.
 
